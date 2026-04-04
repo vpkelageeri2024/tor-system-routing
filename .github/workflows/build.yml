@@ -23,7 +23,7 @@ jobs:
       - name: Build Executable
         run: pyinstaller --noconsole --onefile tor-gui.py
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tor-gui-${{ matrix.os }}
           path: dist/
