@@ -21,15 +21,23 @@ Force all system TCP traffic and DNS queries through the Tor network on Linux. T
 
 ## Installation
 
-1. Clone the repository:
+### For All Linux Distributions (Universal)
+1. Clone the repo and run the install script:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/tor-system-routing.git
+   git clone https://github.com/vpkelageeri2024/tor-system-routing.git
    cd tor-system-routing
-   ```
-2. Run the install script to set up the startup reminder:
-   ```bash
    ./install.sh
    ```
+
+### Distribution-Specific Dependencies
+Before running the installer, ensure your system has the necessary base packages:
+
+*   **Fedora:** 
+    `sudo dnf install tor nftables zenity python3 python3-requests`
+*   **Arch Linux:** 
+    `sudo pacman -S tor nftables zenity python python-requests`
+*   **Ubuntu/Debian:** 
+    `sudo apt install tor nftables zenity python3 python3-requests`
 
 ## Usage
 
