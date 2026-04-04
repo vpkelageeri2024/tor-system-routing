@@ -26,7 +26,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tor-gui-${{ matrix.os }}
+          name: tor-gui-for-${{ matrix.os }}
           path: dist/
 
   release:
