@@ -2,6 +2,8 @@
 
 Force all system TCP traffic and DNS queries through the Tor network on Linux. This project provides a set of scripts to enable transparent proxying with a "Kill-Switch" to prevent data leaks.
 
+**Developed by:** Vishal Prakash Kelageri
+
 ## Features
 
 - **Transparent Proxying:** All TCP traffic is routed through Tor.
@@ -48,6 +50,11 @@ This will restore your normal internet and re-enable IPv6.
 1. **Tor Configuration:** The script checks your `/etc/tor/torrc` for `TransPort 9040` and `DNSPort 5354`.
 2. **Firewall Rules:** Uses `nftables` to redirect all outbound TCP and DNS traffic to the Tor ports.
 3. **Kill-Switch:** A high-priority filter rule drops any packet that is not routed through Tor (except for the Tor process itself).
+
+## Support & Contact
+
+If you encounter any issues or have questions, feel free to reach out:
+- **Instagram:** [@vpkelageri](https://www.instagram.com/vpkelageri)
 
 ## License
 
