@@ -39,6 +39,32 @@ Before running the installer, ensure your system has the necessary base packages
 *   **Ubuntu/Debian:** 
     `sudo apt install tor nftables zenity python3 python3-requests`
 
+## Android Standalone App
+
+A specialized Android version of Tor System Routing is available in the `android/` directory. This app uses the Android `VpnService` API to provide full-system routing without requiring root access.
+
+### Key Features (Android)
+- **VpnService (No Root):** Routes all device traffic through Tor using a local TUN interface.
+- **Bridge Support:** Includes built-in support for OBFS4 bridges to bypass network censorship.
+- **Modern UI:** Built with Jetpack Compose, featuring a dynamic "Onion Shield" status and pulse animations.
+- **Automatic Configuration:** Generates and manages `torrc` settings dynamically.
+
+### How to Build and Install
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/vpkelageeri2024/tor-system-routing.git
+   ```
+2. **Open in Android Studio:**
+   - Launch Android Studio.
+   - Select **Open** and navigate to the `tor-system-routing/android/` directory.
+   - Wait for Gradle to sync dependencies.
+3. **Build the APK:**
+   - Go to **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
+   - Once complete, the APK will be located in `app/build/outputs/apk/debug/`.
+4. **Install on Device:**
+   - Enable "Install from Unknown Sources" on your Android device.
+   - Transfer and install the generated `.apk` file.
+
 ## Usage
 
 ### Start Tor Routing
