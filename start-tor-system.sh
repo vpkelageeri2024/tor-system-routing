@@ -6,13 +6,26 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 echo "[*] Starting System Tor Service..."
-systemctl start tor
+
+# Check and configure /etc/tor/torrc for Transparent Proxy if needed
+if ! grep -q "TransPort 9040" /etc/tor/torrc || ! grep -q "DNSPort 5354" /etc/tor/torrc; then
+  echo "[!] Configuring /etc/tor/torrc for Transparent Proxy..."
+  cat <<EOF >> /etc/tor/torrc
+VirtualAddrNetworkIPv4 10.192.0.0/10
+AutomapHostsOnResolve 1
+TransPort 9040
+DNSPort 5354
+EOF
+  systemctl restart tor
+else
+  systemctl start tor
+fi
 
 echo "[*] Waiting for Tor to bootstrap (Connection Progress):"
 # Monitor journalctl for bootstrap progress
 (
   while true; do
-    PROGRESS=$(journalctl -u tor.service -n 100 --no-pager | grep "Bootstrapped" | tail -n 1 | grep -oP '\d+(?=%)')
+    PROGRESS=$(journalctl -u "tor*" -n 100 --since "1 minute ago" --no-pager | grep "Bootstrapped" | tail -n 1 | grep -oP '\d+(?=%)')
     if [ -n "$PROGRESS" ]; then
       echo -ne "    [ Progress: $PROGRESS% ]\r"
       if [ "$PROGRESS" -eq 100 ]; then

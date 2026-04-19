@@ -6,9 +6,9 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Configuration (System 'toranon' user)
-TOR_UID=$(id -u toranon 2>/dev/null || id -u tor 2>/dev/null)
+TOR_UID=$(id -u toranon 2>/dev/null || id -u tor 2>/dev/null || id -u debian-tor 2>/dev/null)
 if [ -z "$TOR_UID" ]; then
-  echo "[!] Error: Could not find 'toranon' or 'tor' user."
+  echo "[!] Error: Could not find 'toranon', 'tor', or 'debian-tor' user."
   exit 1
 fi
 TRANS_PORT=9040
