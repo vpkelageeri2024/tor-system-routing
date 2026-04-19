@@ -10,8 +10,10 @@ Force all system TCP traffic and DNS queries through the Tor network on Linux. T
 - **DNS Leak Protection:** System DNS is forced to use Tor's local resolver.
 - **Kill-Switch:** Automatically blocks all non-Tor traffic if Tor fails.
 - **IPv6 Protection:** Disables IPv6 while routing is active to prevent leaks.
-- **Graphical Popups:** Uses `pkexec` and `zenity` for a modern experience.
-- **Easy Elevation:** No need to type `sudo` before commands.
+- **Auto-Config:** Automatically configures your `/etc/tor/torrc` for transparent proxying.
+- **Bootstrap Monitoring:** Advanced tracking of Tor's connection progress.
+- **Easy Elevation:** Uses `pkexec` for a secure and modern elevation experience.
+- **Global Commands:** Run from any directory after installation.
 
 ## Prerequisites
 
@@ -28,6 +30,7 @@ Force all system TCP traffic and DNS queries through the Tor network on Linux. T
    cd tor-system-routing
    ./install.sh
    ```
+   *The installer will automatically create symbolic links so you can run the commands from anywhere.*
 
 ### Distribution-Specific Dependencies
 Before running the installer, ensure your system has the necessary base packages:
@@ -36,7 +39,7 @@ Before running the installer, ensure your system has the necessary base packages
     `sudo dnf install tor nftables zenity python3 python3-requests`
 *   **Arch Linux:** 
     `sudo pacman -S tor nftables zenity python python-requests`
-*   **Ubuntu/Debian:** 
+*   **Ubuntu/Debian/Linux Mint:** 
     `sudo apt install tor nftables zenity python3 python3-requests`
 
 ## Android Standalone App
@@ -68,21 +71,25 @@ A specialized Android version of Tor System Routing is available in the `android
 ## Usage
 
 ### Start Tor Routing
+You can now start Tor routing from any directory:
 ```bash
-./start-tor-system.sh
+tor-start
 ```
+*Or manually: `./start-tor-system.sh`*
+
 A popup will ask for your password. Wait for the bootstrap to reach 100%.
 
 ### Stop Tor Routing
+To restore your normal internet and re-enable IPv6:
 ```bash
-./stop-tor.sh
+tor-stop
 ```
-This will restore your normal internet and re-enable IPv6.
+*Or manually: `./stop-tor.sh`*
 
 ## How it Works
 
-1. **Tor Configuration:** The script checks your `/etc/tor/torrc` for `TransPort 9040` and `DNSPort 5354`.
-2. **Firewall Rules:** Uses `nftables` to redirect all outbound TCP and DNS traffic to the Tor ports.
+1. **Tor Configuration:** The script automatically adds `TransPort 9040` and `DNSPort 5354` to your `/etc/tor/torrc` if they are missing.
+2. **Firewall Rules:** Uses `nftables` to redirect all outbound TCP and DNS traffic to the Tor ports. Supports `toranon`, `tor`, and `debian-tor` users.
 3. **Kill-Switch:** A high-priority filter rule drops any packet that is not routed through Tor (except for the Tor process itself).
 
 ## Support & Contact
