@@ -27,5 +27,15 @@ chmod +x stop-tor.sh
 chmod +x tor-route.sh
 chmod +x tor-stop.sh
 
+echo "[*] Creating symbolic links in /usr/local/bin..."
+# Use sudo if not already root for symlink creation
+if [ "$EUID" -ne 0 ]; then
+  sudo ln -sf "$PROJECT_DIR/start-tor-system.sh" /usr/local/bin/tor-start
+  sudo ln -sf "$PROJECT_DIR/stop-tor.sh" /usr/local/bin/tor-stop
+else
+  ln -sf "$PROJECT_DIR/start-tor-system.sh" /usr/local/bin/tor-start
+  ln -sf "$PROJECT_DIR/stop-tor.sh" /usr/local/bin/tor-stop
+fi
+
 echo "[+] Done! The reminder will appear next time you log in."
-echo "[+] To manually start: ./start-tor-system.sh"
+echo "[+] You can now use 'tor-start' and 'tor-stop' from any directory."
