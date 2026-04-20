@@ -67,5 +67,24 @@ A full Android development chain was configured on this Fedora system to enable 
 ## 2. Source Control
 *   **GitHub Push**: All fixes have been committed and pushed to the `main` branch of the repository.
 
+---
+
+# Session Update: DNS Privacy Enhancements
+
+**Date:** Monday, 20 April 2026 (Session 2)  
+**Status:** Successfully Completed  
+**Project:** [tor-system-routing](https://github.com/vpkelageeri2024/tor-system-routing)
+
+---
+
+## 1. DNS Privacy & Fallback Updates
+*   **Cloudflare DNS Integration**: Updated `tor-stop.sh` to use Cloudflare's IPv4 addresses (`1.1.1.1` and `1.0.0.1`) as the primary fallback when Tor is deactivated and `systemd-resolved` is not in use.
+*   **Tor DNS Optimization**: Confirmed that all system DNS queries are correctly routed through Tor's internal resolver (`127.0.0.1:5354`) when routing is active, providing maximum anonymity.
+*   **DoH & DNSCrypt Guidance**: Added configuration placeholders and architectural notes in `tor-route.sh` for users wishing to integrate DNS over HTTPS (via `cloudflared`) or DNSCrypt (via `dnscrypt-proxy`).
+
+## 2. Versioning
+*   **GitHub Release**: Created version `v1.3.0` to encapsulate these privacy-focused DNS updates.
+
 **Report Updated by Gemini CLI.**
+
 
