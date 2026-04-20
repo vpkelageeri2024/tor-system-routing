@@ -21,6 +21,7 @@ if systemctl is-enabled --quiet systemd-resolved 2>/dev/null; then
 else
     rm -f /etc/resolv.conf
     echo "nameserver 1.1.1.1" > /etc/resolv.conf
+    echo "nameserver 1.0.0.1" >> /etc/resolv.conf
 fi
 
 echo "[*] Stopping System Tor Service..."

@@ -69,7 +69,9 @@ for net in "${NON_TOR_NETWORKS[@]}"; do
 done
 
 # 2. DNS Settings
-# Point system DNS to Tor's local DNS resolver
+# Point system DNS to Tor's local DNS resolver (Recommended for anonymity)
+# NOTE: To use DoH or DNSCrypt, you must install 'cloudflared' or 'dnscrypt-proxy'.
+# Cloudflare DoH (for non-Tor use): https://1.1.1.1/dns-query
 if systemctl is-active --quiet systemd-resolved; then
     systemctl stop systemd-resolved
 fi
