@@ -16,8 +16,10 @@ sysctl -w net.ipv6.conf.default.disable_ipv6=0 >/dev/null
 echo "[*] Restoring DNS settings..."
 if systemctl is-enabled --quiet systemd-resolved 2>/dev/null; then
     systemctl start systemd-resolved
+    rm -f /etc/resolv.conf
     ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 else
+    rm -f /etc/resolv.conf
     echo "nameserver 1.1.1.1" > /etc/resolv.conf
 fi
 
@@ -27,5 +29,5 @@ systemctl stop tor
 echo "--------------------------------------------------------"
 echo "DONE! Tor is STOPPED and your normal internet is restored."
 echo "Current IP Check:"
-curl -s https://ipapi.co/json/ | grep -E '"ip"|"country_name"|"city"' || echo "Normal internet is active."
+curl -s http://ip-api.com/json/ | grep -oP '"(query|country|city)":"[^"]+"' | sed 's/"//g' | sed 's/:/: /'
 echo "--------------------------------------------------------"

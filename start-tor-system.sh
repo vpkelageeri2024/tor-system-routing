@@ -43,6 +43,6 @@ echo "[*] Enabling System-wide Routing & Kill Switch..."
 echo "--------------------------------------------------------"
 echo "SUCCESS! Your entire PC is now routed through Tor."
 echo "Current IP Check:"
-curl -s https://ipapi.co/json/ | grep -E '"ip"|"country_name"|"city"' || echo "Check failed, but routing is active."
+curl -s http://ip-api.com/json/ | grep -oP '"(query|country|city)":"[^"]+"' | sed 's/"//g' | sed 's/:/: /'
 echo "--------------------------------------------------------"
 echo "To stop: ./tor-stop.sh"

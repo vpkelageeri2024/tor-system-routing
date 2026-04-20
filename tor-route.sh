@@ -72,8 +72,8 @@ done
 # Point system DNS to Tor's local DNS resolver
 if systemctl is-active --quiet systemd-resolved; then
     systemctl stop systemd-resolved
-    systemctl disable systemd-resolved
 fi
+rm -f /etc/resolv.conf
 echo "nameserver 127.0.0.1" > /etc/resolv.conf
 
 echo "[+] Firewall & Transparent Proxy ENABLED for Tor Browser."
