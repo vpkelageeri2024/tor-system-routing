@@ -11,7 +11,9 @@ Force all system TCP traffic and DNS queries through the Tor network on Linux. T
 - **Kill-Switch:** Automatically blocks all non-Tor traffic if Tor fails.
 - **IPv6 Protection:** Disables IPv6 while routing is active to prevent leaks.
 - **Auto-Config:** Automatically configures your `/etc/tor/torrc` for transparent proxying.
-- **Bootstrap Monitoring:** Advanced tracking of Tor's connection progress.
+- **Bootstrap Monitoring:** Advanced tracking of Tor's connection progress with automatic timeout handling.
+- **Bridge Support:** Integrated support for `obfs4` bridges to bypass censorship.
+- **Enhanced GUI:** A modern Python/Tkinter GUI with live bootstrap progress, activity logs, and async status checks.
 - **Easy Elevation:** Uses `pkexec` for a secure and modern elevation experience.
 - **Global Commands:** Run from any directory after installation.
 
@@ -20,6 +22,8 @@ Force all system TCP traffic and DNS queries through the Tor network on Linux. T
 - **Tor:** `sudo dnf install tor` (Fedora) or `sudo apt install tor` (Ubuntu/Debian).
 - **nftables:** Used for modern firewall rules.
 - **Zenity:** Used for graphical reminders.
+- **obfs4proxy:** (Optional) `sudo apt install obfs4proxy` for bridge support.
+- **Python 3:** Required for the GUI (`python3-tk` and `python3-requests`).
 
 ## Installation
 
