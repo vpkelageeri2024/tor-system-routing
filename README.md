@@ -90,6 +90,19 @@ tor-stop
 ```
 *Or manually: `./stop-tor.sh`*
 
+### Troubleshooting: Tor Taking Too Long / ISP Blocking
+If your Tor connection gets stuck on `[ Waiting for Tor to report status... ]` and times out, your ISP is likely blocking direct connections to Tor. To bypass this, configure a Tor Bridge (`obfs4`):
+
+1. **Get a bridge:** Visit [https://bridges.torproject.org/](https://bridges.torproject.org/) and request an `obfs4` bridge.
+2. **Install obfs4proxy:** Run `sudo apt install obfs4proxy` (Debian/Ubuntu).
+3. **Configure it:** Edit your `/etc/tor/torrc` file (`sudo nano /etc/tor/torrc`) and append your bridge lines to the bottom:
+   ```text
+   UseBridges 1
+   ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+   Bridge obfs4 [IP ADDRESS]:[PORT] [FINGERPRINT] cert=[CERTIFICATE] iat-mode=0
+   ```
+4. Try running `tor-start` again.
+
 ## How it Works
 
 1. **Tor Configuration:** The script automatically adds `TransPort 9040` and `DNSPort 5354` to your `/etc/tor/torrc` if they are missing.
