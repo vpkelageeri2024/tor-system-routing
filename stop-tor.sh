@@ -7,7 +7,7 @@ fi
 
 echo "[*] Disabling Firewall & Kill Switch..."
 # Call the main stop script to clean up everything
-"$(dirname "$0")"/tor-stop.sh
+"$(dirname "$(realpath "$0")")"/tor-stop.sh
 
 echo "--------------------------------------------------------"
 echo "DONE! Your PC is now back to its NORMAL internet connection."

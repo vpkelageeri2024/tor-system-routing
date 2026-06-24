@@ -49,7 +49,7 @@ if [ $WAIT_TIME -ge $MAX_WAIT ]; then
 fi
 
 echo "[*] Enabling System-wide Routing & Kill Switch..."
-"$(dirname "$0")"/tor-route.sh
+"$(dirname "$(realpath "$0")")"/tor-route.sh
 
 echo "--------------------------------------------------------"
 echo "SUCCESS! Your entire PC is now routed through Tor."
